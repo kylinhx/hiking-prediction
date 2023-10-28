@@ -1,6 +1,8 @@
 from flask import Flask, request, render_template
 from HPM.inference import HPM_inference
 import matplotlib.pyplot as plt
+import numpy as np
+
 # 初始化app
 # 设置templates和static文件夹的路径
 app = Flask(__name__)
@@ -38,9 +40,14 @@ def upload():
         else:
             result = HPM_inf.convert_kml_to_data(f)
             # 绘制result的折线图并将其传到result.html中
+            # 两位小数
+            end_time = result[-1] / (60*60)
+            half_time = end_time / (2)
             plot_result(result)
-
-            return render_template('result.html')
+            
+            end_time = np.round(end_time, 2)
+            half_time = np.round(half_time, 2)
+            return render_template('result.html', end_time=end_time, half_time=half_time)
 
     return render_template('main.html')
 if __name__ == '__main__':
