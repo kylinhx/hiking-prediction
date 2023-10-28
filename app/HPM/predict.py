@@ -3,7 +3,7 @@ import torch.nn as nn
 import pandas as pd
 import matplotlib.pyplot as plt
 
-from model.HPM import HPM
+from app.HPM.model.HPM import HPM
 
 # 读取CSV文件
 data = pd.read_csv('./dataset/csv/2022-02-12向阳口珍珠湖避静寺环穿.csv')
